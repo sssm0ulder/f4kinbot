@@ -1,0 +1,1 @@
+from .configobject import Config
