@@ -16,8 +16,8 @@ class ChooseLang(StatesGroup):
     lang = State()
 
 
-@r.message(F.text.in_(['Главное меню', 'Main menu']))
 @r.message(CommandStart())
+@r.message(F.text.in_(['Главное меню', 'Main menu']))
 async def command_start(message: Message, state: FSMContext):
     await message.answer(
         'Выберите язык | Choose language',
@@ -26,24 +26,22 @@ async def command_start(message: Message, state: FSMContext):
     await state.set_state(ChooseLang.lang)
 
 
-@r.message(ChooseLang.lang, F.text.in_(langs))
-async def select_lang(message: Message, state: FSMContext):
-    
-    if message.text == 'RU':
-        await message.answer(
+@r.message(ChooseLang.lang, F.text == 'RU')
+async def ru_lang(message: Message, state: FSMContext):
+    await message.answer(
             'Выберите город',
             reply_markup=ruCityMenu
         )
-        await state.set_state(OrderBitchRu.city)
+    await state.set_state(OrderBitchRu.city)
 
-    elif message.text == 'EN':
-        await message.answer(
+
+@r.message(ChooseLang.lang, F.text == 'EN')
+async def en_lang(message: Message, state: FSMContext):
+    await message.answer(
             'Choose city',
             reply_markup=enCityMenu
         )
-        await state.set_state(OrderBitchEn.city)
-
-
+    await state.set_state(OrderBitchEn.city)
 
 @r.message(ChooseLang.lang)
 async def select_lang_error(message: Message, state: FSMContext):

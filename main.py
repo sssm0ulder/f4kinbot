@@ -23,8 +23,8 @@ async def main():
     bot = Bot(token=config.TOKEN)
     dp = Dispatcher()
 
-    dp.include_router(after_girl_router)
     dp.include_router(lang_router)
+    dp.include_router(after_girl_router)
     dp.include_router(city_router)
     dp.include_router(area_router)
     dp.include_router(service_router)

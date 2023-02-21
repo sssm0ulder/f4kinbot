@@ -17,29 +17,43 @@ from aiogram.fsm.context import FSMContext
 
 r = Router()
 
-
-@r.message(OrderBitchRu.city, F.text.in_(ru_cities))
-async def select_city_ru(message: Message, state: FSMContext):
-    if message.text == 'Алматы':
-        await message.answer(
+# ----------------  Города на русском ----------------
+@r.message(OrderBitchRu.city, F.text == 'Алматы')
+async def almaty_ru(message: Message, state: FSMContext):
+    await message.answer(
             'Выберите район',
             reply_markup=ruAlmatyAreasMenu
         )
-        await state.set_state(OrderBitchRu.area)
-    elif message.text == 'Астана':
-        await message.answer(
+    await state.set_state(OrderBitchRu.area)
+
+@r.message(OrderBitchRu.city, F.text == 'Астана')
+async def astana_ru(message: Message, state: FSMContext):
+    await message.answer(
             'Выберите район',
             reply_markup=ruAstanaAreasMenu
         )
-        await state.set_state(OrderBitchRu.area)
-    elif message.text == 'Шымкент':
-        await message.answer(
+    await state.set_state(OrderBitchRu.area)
+
+
+@r.message(OrderBitchRu.city, F.text == 'Шымкент')
+async def shymkent_city_ru(message: Message, state: FSMContext):
+    await message.answer(
             text='Выберите услугу',
             reply_markup=ruServiceMenu
         )
-        await state.set_state(OrderBitchRu.service)
+    await state.set_state(OrderBitchRu.service)
 
 
+@r.message(OrderBitchRu.city)
+async def select_city_error_ru(message: Message, state: FSMContext):
+    await message.answer(
+        'Ответ неверный, попробуйте снова.',
+        reply_markup=ru_cities
+    )
+# ----------------------------------------------------
+
+
+# ---------------  Города на английском --------------
 @r.message(OrderBitchEn.city, F.text.in_(en_cities))
 async def select_city_en(message: Message, state: FSMContext):
     if message.text == 'Almaty':
@@ -62,17 +76,10 @@ async def select_city_en(message: Message, state: FSMContext):
         await state.set_state(OrderBitchEn.service)
 
 
-@r.message(OrderBitchRu.city)
-async def select_city_error_ru(message: Message, state: FSMContext):
-    await message.answer(
-        'Ответ неверный, попробуйте снова.',
-        reply_markup=ru_cities
-    )
-
-
 @r.message(OrderBitchEn.city)
 async def select_city_error_en(message: Message, state: FSMContext):
     await message.answer(
         'The answer is wrong, try again.',
         reply_markup=en_cities
     )
+# ----------------------------------------------------
