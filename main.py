@@ -2,10 +2,7 @@ import asyncio
 import logging
 import sys
 
-from aiogram import Bot, Dispatcher, types, F
-
-from aiogram.filters import CommandStart, Command, StateFilter
-from aiogram.fsm.context import FSMContext
+from aiogram import Bot, Dispatcher
 
 from config import Config
 
@@ -31,8 +28,8 @@ async def main():
     dp.include_router(city_router)
     dp.include_router(area_router)
     dp.include_router(service_router)
-    dp.include_router(price_router)
     dp.include_router(girl_router)
+    dp.include_router(price_router)
 
     await dp.start_polling(bot)
 

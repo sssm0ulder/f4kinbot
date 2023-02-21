@@ -27,7 +27,7 @@ async def select_service_ru(message: Message, state: FSMContext):
         )
         await state.set_state(OrderBitchRu.price)
     else:
-        await message.answer('Мы отобрали анкеты, которые вам понравятся.')
+        await message.answer('profiles')
         await state.set_state(OrderBitchRu.girl)
 
 
@@ -48,7 +48,7 @@ async def select_service_en(message: Message, state: FSMContext):
         )
         await state.set_state(OrderBitchEn.price)
     else:
-        await message.answer('We have selectedprofiles that you will like.')
+        await message.answer('We have selected profiles that you will like.')
         await state.set_state(OrderBitchRu.girl)
 
 
