@@ -7,6 +7,7 @@ from .kbs import (
     ruServiceMenu,
     enServiceMenu  
 )
+from .girl import showing_girls_ru, showing_girls_en
 
 from aiogram import Router, F
 from aiogram.types import Message
@@ -27,8 +28,7 @@ async def select_service_ru(message: Message, state: FSMContext):
         )
         await state.set_state(OrderBitchRu.price)
     else:
-        await message.answer('profiles')
-        await state.set_state(OrderBitchRu.girl)
+        await showing_girls_ru(message, state)
 
 
 @r.message(OrderBitchRu.service)
@@ -48,8 +48,7 @@ async def select_service_en(message: Message, state: FSMContext):
         )
         await state.set_state(OrderBitchEn.price)
     else:
-        await message.answer('We have selected profiles that you will like.')
-        await state.set_state(OrderBitchRu.girl)
+        await showing_girls_en(message, state)
 
 
 @r.message(OrderBitchEn.service)

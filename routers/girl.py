@@ -100,7 +100,7 @@ async def showing_girls_ru(message: Message, state: FSMContext):
 
 
 @r.message(OrderBitchRu.girl)
-async def showing_girls_ru(message: Message, state: FSMContext):
+async def showing_girls_error_ru(message: Message, state: FSMContext):
     await message.answer(
         'Ошибка. Выберите кнопку на клавиатуре ниже',
         reply_markup=ruGirlsNav 
@@ -128,7 +128,7 @@ async def showing_girls_en(message: Message, state: FSMContext):
 
 
 @r.message(OrderBitchEn.girl)
-async def showing_girls_en(message: Message, state: FSMContext):
+async def showing_girls_error_en(message: Message, state: FSMContext):
     await message.answer(
         'Error. Select a button on the keypad below',
         reply_markup=enGirlsNav
